@@ -7,7 +7,7 @@ IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
 
 # Topic Structure <a name="topic"></a>
 MQTT topic structure for different value.
-X = node number
+X = node number.
 
 ### Sensor Value Topic  <a name="sensorValue"></a>
 MQTT topic for sending various sensor data (temperature, humidity, barometric pressure, etc.).
