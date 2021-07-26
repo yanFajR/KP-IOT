@@ -16,11 +16,19 @@ services:
       - TZ=Asia/Jakarta
     ports:
       - 80:80
+      - 443:443
     networks:
       - kp-iot
     volumes:
-      - ${PWD}/nginx/default.conf:/etc/nginx/conf.d/default.conf
-
+      - type: bind
+        source: ${PWD}/nginx/default.conf
+        target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: ${PWD}/node-key.pem
+        target: /etc/nginx/node-key.pem
+      - type: bind
+        source: ${PWD}/node-cert.pem
+        target: /etc/nginx/node-cert.pem
 # Login container using NodeRED
   nodered-login-dev:
     restart: unless-stopped
@@ -34,8 +42,9 @@ services:
       - kp-iot
     volumes:
       - NodeREDLogindata:/data
-      - ${PWD}/nodered-login-dev/settings.js:/data/settings.js
-
+      - type: bind
+        source: ${PWD}/nodered-login-dev/settings.js
+        target: /data/settings.js
 # Dashboard container using NodeRED
   nodered-dashboard-dev:
     restart: unless-stopped
@@ -49,7 +58,15 @@ services:
       - kp-iot
     volumes:
       - NodeREDdata:/data
-      - ${PWD}/nodered-dashboard-dev/settings.js:/data/settings.js
+      - type: bind
+        source: ${PWD}/nodered-dashboard-dev/settings.js
+        target: /data/settings.js
+      - type: bind
+        source: ${PWD}/node-key.pem
+        target: /data/node-key.pem
+      - type: bind
+        source: ${PWD}/node-cert.pem
+        target: /data/node-cert.pem
 
 #MQTT container using Mosquitto
   mosquitto-broker:
@@ -59,13 +76,24 @@ services:
     environment:
       - TZ=Asia/Jakarta
     ports:
-      - 1883:1883
+      - 8883:8883
     networks:
       - kp-iot
     volumes:
-      - ${PWD}/mosquitto-broker/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - Mosquittodata:/mosquitto/data
       - Mosquittodata:/mosquitto/log
+      - type: bind
+        source: ${PWD}/mosquitto-broker/mosquitto.conf
+        target: /mosquitto/config/mosquitto.conf
+      - type: bind
+        source: ${PWD}/ca.crt
+        target: /mosquitto/config/ca.crt
+      - type: bind
+        source: ${PWD}/server.crt
+        target: /mosquitto/config/server.crt
+      - type: bind
+        source: ${PWD}/server.key
+        target: /mosquitto/config/server.key
 
 #Database container using MariaDB
   mariadb:
