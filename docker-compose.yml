@@ -34,7 +34,6 @@ services:
     restart: unless-stopped
     build:
       context: ./nodered-login-dev
-    image: kp/nodered-login-dev
     container_name: nodered-login-dev
     environment:
       - TZ=Asia/Jakarta
@@ -50,7 +49,6 @@ services:
     restart: unless-stopped
     build:
       context: ./nodered-dashboard-dev
-    image: kp/nodered-dashboard-dev
     container_name: nodered-dashboard-dev
     environment:
       - TZ=Asia/Jakarta
