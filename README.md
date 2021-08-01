@@ -10,7 +10,7 @@ IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
     - [Sensor Value Topic](#sensorValue)
     - [Battery Level Topic](#batteryLevel)
 
-# Installation <a name="install"></a>
+# # Installation <a name="install"></a>
 
 ## Create Docker Volume <a name="volume"></a>
 Run command below to create volume for the dashboard services.
@@ -33,7 +33,7 @@ openssl x509 -in server.crt -fingerprint -sha1 -noout
 ```
 
 
-# Topic Structure <a name="topic"></a>
+# # Topic Structure <a name="topic"></a>
 MQTT topic structure for different value.
 X = node number.
 
