@@ -1,3 +1,4 @@
+# Edit this value according your server's IP Address/Hostname
 CN='/CN=104.43.104.64'
 # Generate Certificate  & Key for CA
 openssl req -new -x509 -days 3650 -extensions v3_ca -keyout ca.key -out ca.crt -nodes -subj $CN
