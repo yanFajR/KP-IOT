@@ -7,7 +7,7 @@
 version: "3.7"
 
 services:
-# Login container using NodeRED
+# Nginx Reverse Proxy
   nginx:
     restart: unless-stopped
     image: nginx:stable-alpine
@@ -24,32 +24,18 @@ services:
         source: ${PWD}/nginx/default.conf
         target: /etc/nginx/conf.d/default.conf
       - type: bind
-        source: ${PWD}/node-key.pem
-        target: /etc/nginx/node-key.pem
+        source: ${PWD}/server.key
+        target: /etc/nginx/server.key
       - type: bind
-        source: ${PWD}/node-cert.pem
-        target: /etc/nginx/node-cert.pem
-# Login container using NodeRED
-  nodered-login-dev:
-    restart: unless-stopped
-    build:
-      context: ./nodered-login-dev
-    container_name: nodered-login-dev
-    environment:
-      - TZ=Asia/Jakarta
-    networks:
-      - kp-iot
-    volumes:
-      - NodeREDLogindata:/data
-      - type: bind
-        source: ${PWD}/nodered-login-dev/settings.js
-        target: /data/settings.js
+        source: ${PWD}/server.crt
+        target: /etc/nginx/server.crt
 # Dashboard container using NodeRED
-  nodered-dashboard-dev:
+  nodered-dashboard:
     restart: unless-stopped
     build:
-      context: ./nodered-dashboard-dev
-    container_name: nodered-dashboard-dev
+      context: ./nodered-dashboard
+    image: kp/nodered-dashboard
+    container_name: nodered-dashboard
     environment:
       - TZ=Asia/Jakarta
     networks:
@@ -57,7 +43,7 @@ services:
     volumes:
       - NodeREDdata:/data
       - type: bind
-        source: ${PWD}/nodered-dashboard-dev/settings.js
+        source: ${PWD}/nodered-dashboard/settings.js
         target: /data/settings.js
       - type: bind
         source: ${PWD}/node-key.pem
@@ -65,7 +51,6 @@ services:
       - type: bind
         source: ${PWD}/node-cert.pem
         target: /data/node-cert.pem
-
 #MQTT container using Mosquitto
   mosquitto-broker:
     restart: unless-stopped
@@ -92,7 +77,6 @@ services:
       - type: bind
         source: ${PWD}/server.key
         target: /mosquitto/config/server.key
-
 #Database container using MariaDB
   mariadb:
     restart: unless-stopped
@@ -112,33 +96,27 @@ services:
       - kp-iot
     volumes:
       - MariaDBdata:/var/lib/mysql
+      - type: bind
+        source: ${PWD}/mariadb/schema.sql
+        target: /docker-entrypoint-initdb.d/schema.sql
 #Web UI to manage database using Adminer
   adminer:
     image: adminer
     container_name: adminer
     restart: always
-    ports:
-      - 8080:8080
     networks:
       - kp-iot
 
 #List of Volume
 volumes:
-#Volume for Login
-  NodeREDLogindata:
-    external: true
-    name: NodeREDLogindata
-
 #Volume for Dashboard
   NodeREDdata:
     external: true
     name: NodeREDdata
-
 #Volume for MQTT
   Mosquittodata:
     external: true
     name: Mosquittodata
-
 #Volume for Database
   MariaDBdata:
     external: true

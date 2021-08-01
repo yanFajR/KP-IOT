@@ -68,7 +68,7 @@ module.exports = {
     //debugUseColors: true,
 
     // The file containing the flows. If not set, it defaults to flows_<hostname>.json
-    //flowFile: 'flows.json',
+    flowFile: 'flows.json',
 
     // To enabled pretty-printing of the flow within the flow file, set the following
     //  property to true:
@@ -94,7 +94,7 @@ module.exports = {
     // By default, the Node-RED UI is available at http://localhost:1880/
     // The following property can be used to specify a different root path.
     // If set to false, this is disabled.
-    //httpAdminRoot: '/admin',
+    httpAdminRoot: '/admin',
 
     // Some nodes, such as HTTP In, can be used to listen for incoming http requests.
     // By default, these are served relative to '/'. The following property
@@ -121,7 +121,7 @@ module.exports = {
     //  readOnly:{boolean},
     //  middleware:{function or array}, (req,res,next) - http middleware
     //  ioMiddleware:{function or array}, (socket,next) - socket.io middleware
-    //ui: { path: "ui" },
+    ui: { path: "/" },
 
     // Securing Node-RED
     // -----------------
@@ -149,10 +149,10 @@ module.exports = {
     // This property can be either an object, containing both a (private) key and a (public) certificate,
     // or a function that returns such an object:
     //// https object:
-    //https: {
-    //  key: require("fs").readFileSync('privkey.pem'),
-    //  cert: require("fs").readFileSync('cert.pem')
-    //},
+    https: {
+      key: require("fs").readFileSync('/data/node-key.pem'),
+      cert: require("fs").readFileSync('/data/node-cert.pem')
+    },
     ////https function:
     // https: function() {
     //     // This function should return the options object, or a Promise
@@ -173,7 +173,7 @@ module.exports = {
 
     // The following property can be used to cause insecure HTTP connections to
     // be redirected to HTTPS.
-    //requireHttps: true,
+    requireHttps: true,
 
     // The following property can be used to disable the editor. The admin API
     // is not affected by this option. To disable both the editor and the admin
@@ -256,7 +256,7 @@ module.exports = {
     },
 
     // Allow the Function node to load additional npm modules
-    functionExternalModules: false,
+    functionExternalModules: true,
 
     // `global.keys()` returns a list of all properties set in global context.
     // This allows them to be displayed in the Context Sidebar within the editor.
