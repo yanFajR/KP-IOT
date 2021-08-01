@@ -16,3 +16,6 @@ openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out c
 # Convert to PEM
 cp server.crt node-cert.pem
 cp server.key node-key.pem
+
+# Generate SHA1 Fingerprint
+openssl -in server.crt -fingerprint -sha1 -noout > sha1_fingerprint.txt
