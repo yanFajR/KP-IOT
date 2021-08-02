@@ -40,12 +40,12 @@ allow_anonymous true
 ```
 docker exec -it mosquitto-broker /bin/sh
 ```
-- Create Mosquitto password file by executing the command below:
+- Create Mosquitto password file by executing the command below inside _mosquitto-broker_ terminal:
 ```
 mosquitto_passwd -c /mosquitto/config/passwd nodered
 ```
 enter the password, this will create username and hashed password used for MQTT authentication and store it inside _passwd_ file.
-- To add username and password, execute the command below:
+- To add username and password, execute the command below inside _mosquitto-broker_ terminal:
 ```
 mosquitto_passwd /mosquitto/config/passwd USERNAME
 ```
