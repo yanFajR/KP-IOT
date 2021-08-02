@@ -2,9 +2,9 @@
 IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
 # Table of contents
 - [Installation](#install)
-    - [Create Docker Volume](#volume)
     - [Generate Self-Signed Certificate](#cert)
     - [Mosquitto Config](#config)
+    - [Create Docker Volume](#volume)
     - [Deploy the Dashboard](#deploy)
     - [Import flows.json](#importFlows)
     - [Microcontroller Scetch](#scetch)
@@ -13,14 +13,6 @@ IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
     - [Battery Level Topic](#batteryLevel)
 
 # # Installation <a name="install"></a>
-
-## Create Docker Volume <a name="volume"></a>
-Run command below to create volume for the dashboard services:
-```
-docker volume create NodeREDdata
-docker volume create MariaDBdata
-docker volume create Mosquittodata
-```
 
 ## Generate Self-Signed Certificate <a name="cert"></a>
 Generate Self-Signed Certificate by executing _cert-gen.sh_ script. Edit CN value inside the script according your server IP address/hostname.
@@ -48,6 +40,14 @@ enter the password, this will create username and hashed password used for MQTT 
 - To add username and password, execute the command below inside _mosquitto-broker_ terminal:
 ```
 mosquitto_passwd /mosquitto/config/passwd USERNAME
+```
+
+## Create Docker Volume <a name="volume"></a>
+Run command below to create volume for the dashboard services:
+```
+docker volume create NodeREDdata
+docker volume create MariaDBdata
+docker volume create Mosquittodata
 ```
 
 ## Deploy the Dashboard <a name="deploy"></a>
