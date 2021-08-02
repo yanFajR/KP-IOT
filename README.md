@@ -6,6 +6,7 @@ IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
     - [Generate Self-Signed Certificate](#cert)
     - [Import flows.json](#importFlows)
     - [Microcontroller Scetch](#scetch)
+    - [Deploy the Dashboard](#deploy)
 - [Topic Structure](#topic)
     - [Sensor Value Topic](#sensorValue)
     - [Battery Level Topic](#batteryLevel)
@@ -20,7 +21,7 @@ docker volume create MariaDBdata
 docker volume create Mosquittodata
 ```
 ## Generate Self-Signed Certificate <a name="cert"></a>
-Generate Self-Signed Certificate by running _cert-gen.sh_ script. Edit CN value inside the script according your server IP address/hostname.
+Generate Self-Signed Certificate by executing _cert-gen.sh_ script. Edit CN value inside the script according your server IP address/hostname.
 
 ## Import flows.json  <a name="importFlows"></a>
 - Login to your NodeRED-Dashboard admin page at https://YOUR-IP/admin. Default account is _admin/password_.
@@ -28,12 +29,17 @@ Generate Self-Signed Certificate by running _cert-gen.sh_ script. Edit CN value 
 
 ## Microcontroller Scetch <a name="scetch"></a>
 - Change _mqtt_server_, Network detail (_IP Address, Subnet Mask, Gateway_) value inside _ino_ file according to your setup.
-- Change _fingerprint_ value, Fingerprint can be copied from _sha1-fingerprint.txt_ file, or by running the command below in terminal:
+- Change _fingerprint_ value, Fingerprint can be copied from _sha1-fingerprint.txt_ file, or by executing the command below in terminal:
 ```
 openssl x509 -in server.crt -fingerprint -sha1 -noout
 ```
 - Edit fingerprint writing format and match it with fingerprint example inside sketch demo file.
 
+## Deploy the Dashboard <a name="deploy"></a>
+Deploy dashboard by executing the command below:
+```
+docker-compose up -d
+```
 
 # # Topic Structure <a name="topic"></a>
 MQTT topic structure for different value.
