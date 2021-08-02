@@ -88,8 +88,6 @@ services:
       - MYSQL_USER=nodered
       - MYSQL_PASSWORD=kpiot123
       - MYSQL_DATABASE=iotData
-#   expose:
-#      - 3306
     ports:
       - 3306:3306
     networks:
