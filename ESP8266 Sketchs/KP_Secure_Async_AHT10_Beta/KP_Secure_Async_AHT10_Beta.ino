@@ -9,7 +9,7 @@
 const char* wifiSsid = mySSID;
 const char* wifiPass = myPASSWORD;
 uint8_t bssid[] = {0xD8, 0x74, 0x95, 0xE2, 0xD5, 0x8C};
-int32_t ch = 11;
+int32_t ch = 1;
 IPAddress ip(192, 168, 14, 51);
 IPAddress subnet(255, 255, 255, 0);
 IPAddress gateway(192, 168, 14, 254);
@@ -20,10 +20,12 @@ WiFiClientSecure espClient;
 //MQTT VARIABLE
 const char* mqtt_server = "192.168.14.100";
 const char* topic = "iot/node/2";
+const char* user = "node2";
+const char* passwd = "node2qwerty";
 PubSubClient client(espClient);
 
 //SENSOR VARIABLE
-float cal = 0.00437; // analog to voltage calibration value
+float cal = 0.0044; // analog to voltage calibration value
 String sensorTopic;
 String sensorPayload;
 String batteryTopic;
@@ -39,7 +41,7 @@ int publishCompleted = 0;
 //MQTT RECONNECT
 void mqttReconnect() {
   while (!client.connected()) {
-    client.connect(topic);
+    client.connect(topic, user, passwd);
   }
 }
 
