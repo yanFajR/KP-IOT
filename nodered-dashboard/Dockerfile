@@ -11,3 +11,6 @@ RUN npm install node-red-node-mysql
 
 #NodeRED Telegram Bot
 RUN npm install node-red-contrib-telegrambot
+
+#NodeRED Iframe
+RUN npm install node-red-node-ui-iframe
