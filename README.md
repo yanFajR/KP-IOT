@@ -8,6 +8,7 @@ IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
     - [Deploy the Dashboard](#deploy)
     - [Import flows.json](#importFlows)
     - [Microcontroller Scetch](#scetch)
+    - [Android IP Camera Configuration](#ipCam)
 - [Topic Structure](#topic)
     - [Sensor Value Topic](#sensorValue)
     - [Battery Level Topic](#batteryLevel)
@@ -56,7 +57,7 @@ Deploy dashboard by executing the command below:
 docker-compose up -d
 ```
 
-## Import flows.json  <a name="importFlows"></a>
+## Import flows.json <a name="importFlows"></a>
 - Login to your NodeRED-Dashboard admin page at https://YOUR-IP/admin. Default account is _admin/password_.
 - After logged in, Click 3 Horizontal button, Select Import, Upload _flows.json_ file inside _nodered-dashboard_ folder from this repository.
 
@@ -69,6 +70,12 @@ openssl x509 -in server.crt -fingerprint -sha1 -noout
 - Edit fingerprint writing format and match it with fingerprint example inside sketch demo file.
 - If you use MQTT authentication, change _user_ and _passwd_ variable inside scetch file according to username and password that exists inside _passwd_ file created in [this](#config) step.
 - If you do not use MQTT authentication, just comment _user_ and _passwd_ and remove _user_ and _passwd_ parameter in _connect_ method inside scetch file.
+
+## Android IP Camera Configuration <a name="ipCam"></a>
+- Download "IP Webcam" app from Google Play Store.
+- Open the app & Click "Start Server".
+- On Dashboard, Open "IP Camera Streaming" Tab.
+- Enter IP & Port and Click "Submit".
 
 # # Topic Structure <a name="topic"></a>
 MQTT topic structure for different value.
