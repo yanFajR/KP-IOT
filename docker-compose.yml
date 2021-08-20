@@ -51,6 +51,9 @@ services:
       - type: bind
         source: ${PWD}/node-cert.pem
         target: /data/node-cert.pem
+      - type: bind
+        source: ${PWD}/nodered-dashboard/flows.js
+        target: /data/flows.json
 #MQTT container using Mosquitto
   mosquitto-broker:
     restart: unless-stopped
