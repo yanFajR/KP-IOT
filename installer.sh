@@ -30,8 +30,9 @@ docker volume create Mosquittodata
 
 docker-compose up -d
 
+echo "fingerprint : "
 openssl x509 -in server.crt -fingerprint -sha1 -noout
-openssl x509 -in server.crt -fingerprint -sha1 -noout >> fingerprint.txt
+
 
 echo "nodered dashboard https://${SERVERIP}"
 echo "nodered dashboard admin https://${SERVERIP}/admin"
