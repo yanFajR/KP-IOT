@@ -14,6 +14,3 @@ RUN npm install node-red-contrib-telegrambot
 
 #NodeRED Iframe
 RUN npm install node-red-node-ui-iframe
-
-#NodeRED Iframe
-RUN npm install @sherlock-gmbh/node-red-contrib-ui-iframe-modal
