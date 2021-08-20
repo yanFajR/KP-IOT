@@ -20,7 +20,7 @@ cp server.crt node-cert.pem
 cp server.key node-key.pem
 
 # Generate SHA1 Fingerprint
-openssl -in server.crt -fingerprint -sha1 -noout > sha1_fingerprint.txt
+openssl -in server.crt -fingerprint -sha1 -noout
 
 sudo chmod -R 777 *
 

@@ -2,10 +2,8 @@
 IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
 # Table of contents
 - [Installation](#install)
-    - [Generate Self-Signed Certificate](#cert)
+    - [Generate Self-Signed Certificate, Create Docker Volume, Deploy the Dashboard ](#installer)
     - [Mosquitto Config](#config)
-    - [Create Docker Volume](#volume)
-    - [Deploy the Dashboard](#deploy)
     - [Import flows.json](#importFlows)
     - [Microcontroller Scetch](#scetch)
     - [Android IP Camera Configuration](#ipCam)
@@ -15,19 +13,19 @@ IoT Dashboard based on NodeRED and ESP8266 Microcontroller Repository.
 
 # # Installation <a name="install"></a>
 
-## Generate Self-Signed Certificate <a name="cert"></a>
-Generate Self-Signed Certificate by executing _cert-gen.sh_ script. Edit CN value inside the script according your server IP address/hostname.
+## Generate Self-Signed Certificate <a name="installer"></a>
+Generate Self-Signed Certificate, Create Docker Volume, Deploy the Dashboard by executing _installer.sh_ script. enter IP Server value according your server IP address/hostname.
 
 ## Mosquitto Config <a name="config"></a>
-- For first time deployment, disable authentication. To disable authentication in MQTT, change these lines inside _mosquitto.conf_ file. From 
-```
-allow_anonymous false
-password_file /mosquitto/config/passwd
-```
-to 
+- For first time deployment, authentication is disabled. To enable authentication in MQTT, change these lines inside _mosquitto.conf_ file inside container. From 
 ```
 allow_anonymous true
 #password_file /mosquitto/config/passwd
+```
+to 
+```
+allow_anonymous false
+password_file /mosquitto/config/passwd
 ```
 - After _mosquitto-broker_ container running, enter _mosquitto-broker_ container terminal by executing the command below:
 ```
@@ -41,20 +39,6 @@ enter the password, this will create username and hashed password used for MQTT 
 - To add username and password, execute the command below inside _mosquitto-broker_ terminal:
 ```
 mosquitto_passwd /mosquitto/config/passwd USERNAME
-```
-
-## Create Docker Volume <a name="volume"></a>
-Run command below to create volume for the dashboard services:
-```
-docker volume create NodeREDdata
-docker volume create MariaDBdata
-docker volume create Mosquittodata
-```
-
-## Deploy the Dashboard <a name="deploy"></a>
-Deploy dashboard by executing the command below:
-```
-docker-compose up -d
 ```
 
 ## Import flows.json <a name="importFlows"></a>
