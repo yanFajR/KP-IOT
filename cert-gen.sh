@@ -1,9 +1,5 @@
-# Edit this value according your server's IP Address/Hostname
+# enter this value according your server's IP Address/Hostname
 read -p 'IP Server: ' SERVERIP
-
-docker volume create NodeREDdata
-docker volume create MariaDBdata
-docker volume create Mosquittodata
 
 CN='/CN=$SERVERIP'
 # Generate Certificate  & Key for CA
@@ -26,11 +22,16 @@ cp server.key node-key.pem
 # Generate SHA1 Fingerprint
 openssl -in server.crt -fingerprint -sha1 -noout > sha1_fingerprint.txt
 
-sudo chmod 777 *
+sudo chmod -R 777 *
+
+docker volume create NodeREDdata
+docker volume create MariaDBdata
+docker volume create Mosquittodata
 
 docker-compose up -d
 
 openssl x509 -in server.crt -fingerprint -sha1 -noout
+openssl x509 -in server.crt -fingerprint -sha1 -noout >> fingerprint.txt
 
 echo "nodered dashboard https://${SERVERIP}"
 echo "nodered dashboard admin https://${SERVERIP}/admin"
